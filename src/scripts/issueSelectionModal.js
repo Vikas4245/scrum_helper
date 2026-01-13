@@ -478,15 +478,19 @@ class IssueSelectionModal {
      * Open the modal
      */
     async open(onSelectionComplete = null) {
+        console.log('🚪 Modal open() called with callback:', !!onSelectionComplete);
         this.onSelectionComplete = onSelectionComplete;
+        console.log('💾 Callback stored:', !!this.onSelectionComplete);
         this.isOpen = true;
         document.getElementById('issue-selection-modal').style.display = 'flex';
         document.body.style.overflow = 'hidden';
 
         // Load data if not already loaded
         if (this.allItems.length === 0) {
+            console.log('📡 No data cached, refreshing...');
             await this.refreshData();
         } else {
+            console.log('📋 Using cached data, rendering items...');
             this.renderItems();
         }
     }
